@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {App} from "./App";
+import { Routers } from "./Routers";
 import { ToastContainer } from "react-toastify";
-import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter } from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
 import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
 	<React.StrictMode>
 		<CssBaseline />
 		<ToastContainer />
-		<App />
+		<BrowserRouter>
+			<Routers />
+		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

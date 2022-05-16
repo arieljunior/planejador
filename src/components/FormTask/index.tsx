@@ -1,7 +1,17 @@
 import React, { useState } from "react";
-import { FormControl, Button, InputLabel, Input } from "@mui/material";
+import {
+	FormControl,
+	Button,
+	InputLabel,
+	Input,
+	TextField,
+} from "@mui/material";
 import { TaskModel } from "../../interfaces/task.interface";
 import { ActionsContainer, FormContent } from "./styles";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { ptBR } from "date-fns/locale";
 
 interface IFormTask {
 	handleConfirm: (data: TaskModel) => void;
@@ -19,6 +29,8 @@ export const FormTask: React.FC<IFormTask> = ({
 	const [form, setForm] = useState<TaskModel>({
 		description: values?.description || "",
 		title: values?.title || "",
+		startDate: null,
+		finalDate: null,
 	});
 
 	return (
@@ -28,20 +40,15 @@ export const FormTask: React.FC<IFormTask> = ({
 				handleConfirm(form);
 			}}>
 			<FormContent>
-				<FormControl>
-					<InputLabel htmlFor='input-title'>Título</InputLabel>
-					<Input
+					<TextField
 						id='input-title'
 						placeholder='Título da tarefa'
 						required
 						value={form.title}
 						onChange={({ target }) => setForm({ ...form, title: target.value })}
 					/>
-				</FormControl>
 
-				<FormControl>
-					<InputLabel htmlFor='input-title'>Tarefa</InputLabel>
-					<Input
+					<TextField
 						id='input-description-task'
 						placeholder='Descrição da tarefa'
 						required
@@ -50,7 +57,28 @@ export const FormTask: React.FC<IFormTask> = ({
 							setForm({ ...form, description: target.value })
 						}
 					/>
-				</FormControl>
+
+					<LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+						<DateTimePicker
+							renderInput={(props) => <TextField {...props} />}
+							value={form.startDate}
+							label="Data início da tarefa"
+							onChange={(newValue) => {
+								setForm({ ...form, startDate: newValue });
+							}}
+						/>
+					</LocalizationProvider>
+
+					<LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+						<DateTimePicker
+							renderInput={(props) => <TextField {...props} />}
+							value={form.finalDate}
+							label="Data fim da tarefa"
+							onChange={(newValue) => {
+								setForm({ ...form, finalDate: newValue });
+							}}
+						/>
+					</LocalizationProvider>
 				<ActionsContainer>
 					<Button variant='outlined' type='button' onClick={handleCancel}>
 						Cancelar

@@ -5,6 +5,7 @@ export const ActionsContainer = styled.div`
     grid-template-columns: 200px 200px;
     flex-direction: row;
     gap: 20px;
+    margin-top: 30px;
 `;
 
 export const FormContent = styled.div`

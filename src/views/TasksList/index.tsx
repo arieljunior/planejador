@@ -111,7 +111,7 @@ export const TasksList: React.FC = () => {
 				show={modalState.show}
 				handleClose={closeModal}
 				removeActions
-				title={!!modalState.idEdit ? "Atualizar Tarefa" : "Criar Tarefa"}>
+				title={!!modalState.idEdit ? "Atualizar Tarefa" : "Nova Tarefa"}>
 				<FormTask
 					handleConfirm={(data) => {
 						if (!!modalState.idEdit) {

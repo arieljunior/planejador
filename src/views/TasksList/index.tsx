@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CardList } from "../../components/CardList";
+import { TaskList } from "../../components/TaskList";
 import { ModalCustom } from "../../components/Modal";
 import { FormTask } from "../../components/FormTask";
 import { CircularProgress, Button } from "@mui/material";
@@ -160,7 +160,7 @@ export const TasksList: React.FC = () => {
 					<CircularProgress />
 				</ContainerSpinner>
 			) : (
-				<CardList
+				<TaskList
 					list={data.tasks}
 					onClickDelete={removeTask}
 					onClickEdit={openModalEditionTask}

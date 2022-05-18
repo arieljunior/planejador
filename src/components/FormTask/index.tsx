@@ -53,7 +53,6 @@ export const FormTask: React.FC<IFormTask> = ({
 					required
 					multiline
 					rows={4}
-					maxRows={6}
 					value={form.description}
 					onChange={({ target }) =>
 						setForm({ ...form, description: target.value })

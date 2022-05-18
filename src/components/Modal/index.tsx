@@ -27,7 +27,7 @@ export const ModalCustom: React.FC<IModalCustom> = ({
 }: IModalCustom) => {
 	return (
 		<Dialog open={show} onClose={handleClose}>
-			<DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
+			<DialogTitle>{title}</DialogTitle>
 			<DialogContent>{children}</DialogContent>
 			{!removeActions && (
 				<DialogActions>

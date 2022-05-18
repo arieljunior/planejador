@@ -6,7 +6,7 @@ export const getTasks = async (): Promise<Task[]> => {
 	return data;
 };
 
-export const deleteTask = async (id:number): Promise<boolean> => {
+export const deleteTask = async (id: number): Promise<boolean> => {
 	const { status } = await http.delete(`/tasks/${id}`);
 	return status === 200;
 };

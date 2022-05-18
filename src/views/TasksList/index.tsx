@@ -62,16 +62,15 @@ export const TasksList: React.FC = () => {
 		});
 	};
 
-	const openModalEditionTask = (id: number) => {
-		const task = data.tasks.find((item) => item.id === id);
+	const openModalEditionTask = (task: Task) => {
 		setModalState({
 			show: true,
-			idEdit: id,
+			idEdit: task.id,
 			form: task,
 		});
 	};
 
-	const handleEditTask = async (data: Task) => {
+	const editTask = async (data: Task) => {
 		const updated = await updateTask(data);
 		if (updated) {
 			toast.success("Tarefa editada com sucesso!");
@@ -79,6 +78,33 @@ export const TasksList: React.FC = () => {
 			reloadList();
 		} else {
 			toast.error("Não foi possível editar esta tarefa!");
+		}
+	};
+
+	const completeTask = async (data: Task) => {
+		const updated = await updateTask({...data, done: true, blocked: false});
+		if (updated) {
+			reloadList();
+		}else {
+			toast.error("Não foi possível completar sua tarefa")
+		}
+	};
+
+	const blockTask = async (data: Task) => {
+		const updated = await updateTask({...data, done: false, blocked: true});
+		if (updated) {
+			reloadList();
+		}else {
+			toast.error("Não foi possível bloquear sua tarefa")
+		}
+	};
+
+	const clearStatusTask = async (data: Task) => {
+		const updated = await updateTask({...data, done: false, blocked: false});
+		if (updated) {
+			reloadList();
+		}else {
+			toast.error("Não foi possível limpar o status da tarefa")
 		}
 	};
 
@@ -115,7 +141,7 @@ export const TasksList: React.FC = () => {
 				<FormTask
 					handleConfirm={(data) => {
 						if (!!modalState.idEdit) {
-							handleEditTask({
+							editTask({
 								...data,
 								id: modalState.idEdit,
 							});
@@ -138,6 +164,9 @@ export const TasksList: React.FC = () => {
 					list={data.tasks}
 					onClickDelete={removeTask}
 					onClickEdit={openModalEditionTask}
+					onClickDone={completeTask}
+					onClickBlock={blockTask}
+					onClickClear={clearStatusTask}
 				/>
 			)}
 		</>

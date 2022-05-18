@@ -1,8 +1,10 @@
 export interface TaskModel {
 	title: string;
 	description: string;
-	startDate: Date | null;
-	finalDate: Date | null;
+	startDate: string | null;
+	finalDate: string | null;
+	done: boolean;
+	blocked: boolean;
 }
 
 export interface Task extends TaskModel {

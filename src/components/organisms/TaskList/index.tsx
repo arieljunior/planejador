@@ -1,6 +1,6 @@
 import React from "react";
-import { Task } from "../../interfaces/task.interface";
-import { CardCustom } from "../CardTask";
+import { Task } from "../../../interfaces/task.interface";
+import { CardCustom } from "../../atoms/CardTask";
 import { GridContainer } from "./styles";
 import { isToday, format } from "date-fns";
 import { ptBR } from "date-fns/locale";

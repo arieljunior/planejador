@@ -8,7 +8,7 @@ import {
 	Typography,
 	Avatar,
 } from "@mui/material";
-import { Task } from "../../interfaces/task.interface";
+import { Task } from "../../../interfaces/task.interface";
 import {
 	ContainerActions,
 	TextDateTime,
@@ -16,8 +16,8 @@ import {
 	BlockIconCustom,
 	ClearIconCustom
 } from "./styles";
-import { MenuDots } from "../MenuDots";
-import { formatDateString } from "../../utils/date.utils";
+import { MenuDots } from "../../molecules/MenuDots";
+import { formatDateString } from "../../../utils/date.utils";
 
 export const CardCustom = ({
 	content,

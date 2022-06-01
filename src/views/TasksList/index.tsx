@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { TaskList } from "../../components/TaskList";
-import { ModalCustom } from "../../components/Modal";
-import { FormTask } from "../../components/FormTask";
-import { CircularProgress, Button } from "@mui/material";
+import { TaskList } from "../../components/organisms/TaskList";
+import { ModalCustom } from "../../components/molecules/Modal";
+import { FormTask } from "../../components/organisms/FormTask";
+import {
+	CircularProgress,
+	Button,
+	Box,
+	Drawer,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText,
+} from "@mui/material";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { toast } from "react-toastify";
 import {
 	getTasks,
@@ -82,29 +93,29 @@ export const TasksList: React.FC = () => {
 	};
 
 	const completeTask = async (data: Task) => {
-		const updated = await updateTask({...data, done: true, blocked: false});
+		const updated = await updateTask({ ...data, done: true, blocked: false });
 		if (updated) {
 			reloadList();
-		}else {
-			toast.error("Não foi possível completar sua tarefa")
+		} else {
+			toast.error("Não foi possível completar sua tarefa");
 		}
 	};
 
 	const blockTask = async (data: Task) => {
-		const updated = await updateTask({...data, done: false, blocked: true});
+		const updated = await updateTask({ ...data, done: false, blocked: true });
 		if (updated) {
 			reloadList();
-		}else {
-			toast.error("Não foi possível bloquear sua tarefa")
+		} else {
+			toast.error("Não foi possível bloquear sua tarefa");
 		}
 	};
 
 	const clearStatusTask = async (data: Task) => {
-		const updated = await updateTask({...data, done: false, blocked: false});
+		const updated = await updateTask({ ...data, done: false, blocked: false });
 		if (updated) {
 			reloadList();
-		}else {
-			toast.error("Não foi possível limpar o status da tarefa")
+		} else {
+			toast.error("Não foi possível limpar o status da tarefa");
 		}
 	};
 
@@ -127,8 +138,58 @@ export const TasksList: React.FC = () => {
 	}, [data]);
 
 	return (
-		<>
+		<Box>
+			<Drawer variant='permanent' open>
+				<List>
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Todas tarefas"} />
+						</ListItemButton>
+					</ListItem>
+
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Tarefas pendentes"} />
+						</ListItemButton>
+					</ListItem>
+
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Tarefas atrasadas"} />
+						</ListItemButton>
+					</ListItem>
+	
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Tarefas bloqueadas"} />
+						</ListItemButton>
+					</ListItem>
+					
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Tarefas concluídas"} />
+						</ListItemButton>
+					</ListItem>
+				</List>
+			</Drawer>
+
 			<h1>{title}</h1>
+
 			<Button variant='contained' type='button' onClick={openModalCreateTask}>
 				Criar tarefa
 			</Button>
@@ -169,6 +230,6 @@ export const TasksList: React.FC = () => {
 					onClickClear={clearStatusTask}
 				/>
 			)}
-		</>
+		</Box>
 	);
 };

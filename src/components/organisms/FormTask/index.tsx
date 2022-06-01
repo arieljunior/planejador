@@ -3,7 +3,7 @@ import {
 	Button,
 	TextField,
 } from "@mui/material";
-import { TaskModel } from "../../interfaces/task.interface";
+import { TaskModel } from "../../../interfaces/task.interface";
 import { ActionsContainer, FormContent } from "./styles";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

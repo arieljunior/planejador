@@ -2,18 +2,12 @@ import React, { useState, useEffect } from "react";
 import { TaskList } from "../../components/organisms/TaskList";
 import { ModalCustom } from "../../components/molecules/Modal";
 import { FormTask } from "../../components/organisms/FormTask";
-import {
-	CircularProgress,
-	Button,
-	Box,
-	Drawer,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-} from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { CircularProgress, Button, Box, Container } from "@mui/material";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import SdCardAlertIcon from '@mui/icons-material/SdCardAlert';
+import ErrorIcon from '@mui/icons-material/Error';
+import BlockIcon from '@mui/icons-material/Block';
+import TaskIcon from '@mui/icons-material/Task';
 import { toast } from "react-toastify";
 import {
 	getTasks,
@@ -24,6 +18,8 @@ import {
 import { ContainerSpinner } from "./styles";
 import { Task, TaskModel } from "../../interfaces/task.interface";
 import { DataComponent, ModalState } from "./interfaces";
+import { MenuDrawer } from "../../components/organisms/MenuDrawer";
+import {Header} from '../../components/organisms/Header';
 
 export const TasksList: React.FC = () => {
 	const title = "Lista de Tarefas";
@@ -139,60 +135,35 @@ export const TasksList: React.FC = () => {
 
 	return (
 		<Box>
-			<Drawer variant='permanent' open>
-				<List>
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Todas tarefas"} />
-						</ListItemButton>
-					</ListItem>
-
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Tarefas pendentes"} />
-						</ListItemButton>
-					</ListItem>
-
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Tarefas atrasadas"} />
-						</ListItemButton>
-					</ListItem>
-	
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Tarefas bloqueadas"} />
-						</ListItemButton>
-					</ListItem>
-					
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Tarefas concluídas"} />
-						</ListItemButton>
-					</ListItem>
-				</List>
-			</Drawer>
-
+			<Header/>
+			<MenuDrawer
+				options={[
+					{
+						label: "Todas",
+						icon: AssignmentIcon,
+					},
+					{
+						label: "Pendentes",
+						icon: SdCardAlertIcon,
+					},
+					{
+						label: "Atrasadas",
+						icon: ErrorIcon,
+					},
+					{
+						label: "Bloqueadas",
+						icon: BlockIcon,
+					},
+					{
+						label: "Concluídas",
+						icon: TaskIcon,
+					},
+				]}
+				onClickOption={(label) => {}}
+			/>
 			<h1>{title}</h1>
 
-			<Button variant='contained' type='button' onClick={openModalCreateTask}>
-				Criar tarefa
-			</Button>
+			
 
 			<ModalCustom
 				show={modalState.show}
@@ -216,20 +187,25 @@ export const TasksList: React.FC = () => {
 				/>
 			</ModalCustom>
 
-			{data.loading ? (
-				<ContainerSpinner>
-					<CircularProgress />
-				</ContainerSpinner>
-			) : (
-				<TaskList
-					list={data.tasks}
-					onClickDelete={removeTask}
-					onClickEdit={openModalEditionTask}
-					onClickDone={completeTask}
-					onClickBlock={blockTask}
-					onClickClear={clearStatusTask}
-				/>
-			)}
+			<Container>
+				<Button variant='contained' type='button' onClick={openModalCreateTask}>
+					Criar tarefa
+				</Button>
+				{data.loading ? (
+					<ContainerSpinner>
+						<CircularProgress />
+					</ContainerSpinner>
+				) : (
+					<TaskList
+						list={data.tasks}
+						onClickDelete={removeTask}
+						onClickEdit={openModalEditionTask}
+						onClickDone={completeTask}
+						onClickBlock={blockTask}
+						onClickClear={clearStatusTask}
+					/>
+				)}
+			</Container>
 		</Box>
 	);
 };

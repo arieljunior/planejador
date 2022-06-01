@@ -49,7 +49,7 @@ export const TaskList = ({
 	);
 
 	return (
-		<div>
+		<>
 			{Object.keys(separatedByDay).map((label) => (
 				<div>
 					<Typography variant='h5'>{label}</Typography>
@@ -68,6 +68,6 @@ export const TaskList = ({
 					</GridContainer>
 				</div>
 			))}
-		</div>
+		</>
 	);
 };

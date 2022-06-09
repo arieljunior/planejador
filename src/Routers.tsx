@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "@mui/material";
-import { TasksList } from "./views/TasksList";
+import { TasksList } from "./pages/TasksList";
 import { Routes, Route } from "react-router-dom";
 
 export const Routers: React.FC = () => {

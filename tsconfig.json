@@ -20,10 +20,10 @@
 			"@constants/*": ["constants/*"],
 			"@interfaces/*": ["interfaces/*"],
 			"@pages/*": ["pages/*"],
-			// "@routes/*": ["src/Routes/*"],
 			"@services/*": ["services/*"],
+			// "@routes/*": ["src/Routes/*"],
 			// "@store/*": ["./src/store/*"],
-			// "@styles/*": ["./src/styles/*"],
+			"@styles/*": ["styles/*"],
 			"@utils/*": ["utils/*"]
 			// "@builders/*": ["./src/builders/*"],
 			// "@assets/*": ["./src/assets/*"],

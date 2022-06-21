@@ -18,7 +18,7 @@ import {
 import { ContainerSpinner } from "./styles";
 import { Task, TaskModel } from "../../interfaces/task.interface";
 import { DataComponent, ModalState } from "./interfaces";
-import { MenuDrawer } from "../../components/organisms/MenuDrawer";
+import { ButtonsFilter } from "../../components/molecules/ButtonsFilter";
 import {Header} from '../../components/organisms/Header';
 
 export const TasksList: React.FC = () => {
@@ -134,9 +134,9 @@ export const TasksList: React.FC = () => {
 	}, [data]);
 
 	return (
-		<Box>
+		<div>
 			<Header/>
-			<MenuDrawer
+			<ButtonsFilter
 				options={[
 					{
 						label: "Todas",
@@ -159,7 +159,7 @@ export const TasksList: React.FC = () => {
 						icon: TaskIcon,
 					},
 				]}
-				onClickOption={(label) => {}}
+				onClick={(label) => {}}
 			/>
 			<h1>{title}</h1>
 
@@ -206,6 +206,6 @@ export const TasksList: React.FC = () => {
 					/>
 				)}
 			</Container>
-		</Box>
+		</div>
 	);
 };
